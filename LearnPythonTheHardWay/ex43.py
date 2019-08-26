@@ -85,19 +85,24 @@ class CentralCorridor(Scene):
             return 'death'
         elif action == "讲个笑话":
             print(dedent("""
-                Lucky for you they made you learn Gothon insults in
-                the academy. you tell the one Gothon joke you know:
-                Lbhe zbgure vf fb sng, jura fur fvgf nebhaq gur ubhfr,
-                fur fvgf nebhaq gur ubhfr. The Gothon stops, tries not
-                to laugh, then busts out laughing and can't move.
-                While he's laughing you run up and shoot him square in
-                the head putting him down, then jump through the
-                Weapon Armory door.
+                在这千钧一发之际，你想起一句话
+                “爱笑的人运气都不会太差”
+                于是突然大笑了起来。
+                外星人显然蒙住了，
+                “你在笑什么？”
+                “我想起高兴的事情”
+                “什么事情？”
+                “我一发出黑了”
+                “？？？？”
+                怪兽气坏了，大吼道
+                “你个欧洲人，去死吧”
+                显然它是个非洲人，而且是最非的那种
+                一个平地摔都能将它带走
                 """))
             return 'laser_weapon_armory'
 
         else:
-            print("DOES NOT COMPUTE!")
+            print("额，虽然我并不清楚你这是在做什么，但这显然没用。但幸好怪兽也没反应过来。")
             return 'central_corridor'
 
 
@@ -105,38 +110,44 @@ class LaserWeaponArmory(Scene):
 
     def enter(self):
         print(dedent("""
-            You do a dive roll into the Weapon Armory, croych and scan
-            the room for more Gothons that might be hiding. It's dead
-            quiet, too quiet. You stand up and run to the far side of
-            the room and find the neutron bomb in its container.
-            There's a keypad lock on the box and you need the code to
-            get the bomb out. If you get the code worng 10 times then
-            the lock closes forever and you can't get the bomb. The
-            code is 3 digits.
+            你溜进了工厂，但事情有些不对
+            这里太安静了，安静到你可以清晰的听到自己的心跳声
+            你高度警惕，提防着任何阴暗的角落。
+            但你最终还是到了，你看到你心心念念的那颗中子炸弹
+            就在你面前的盒子中
+
+            这时候挡在你面前的是一道密码锁
+            三位数的密码让你陷入了沉思
+            显然密码并不会让你尝试 999 次，但应该会有10次左右的机会 。
+            “来吧” 你想到，
+            “赌命的时候到了”
             """))
 
         code = f"{randint(1, 9)}{randint(1, 9)}{randint(1, 9)}"
         guess = input("[keypad]> ")
         guesses = 0
 
+        # 官方外挂
+        print(code)
+
         while guess != code and guesses < 10:
-            print("BZZZZEDDD!")
+            print(f'你尝试了{guess}, 不行，打不开这把锁。\n"还有{10 - guesses}次机会"，你想到')
             guesses += 1
             guess = input('[keypad]> ')
 
         if guess == code:
             print(dedent("""
-                The container clicks open and the seal breaks, letting
-                gas out. You grab the neutron bomb and run as fast as
-                you can to the bridge where you must place it in the right spot.
+                欧洲人的人生总是这么的简单，
+                你轻松的打开了锁，
+                拿到了【中子炸弹】
                 """))
             return 'the_bridge'
         else:
             print(dedent("""
-                The lock buzzes one last time and then you hear a
-                sickening melting sound as the mechanism is fused
-                together. You decide to sit there, and finally the
-                Gothons blow up the ship from their ship and you die.
+                人生的运气总是守恒的，
+                显然，你现在体会到了被你嘲讽的外星人的感觉
+                非酋的人生真的是太难了
+                于是 你逐渐停止了思考。
                 """))
             return 'death'
 
@@ -145,37 +156,45 @@ class TheBridge(Scene):
 
     def enter(self):
         print(dedent("""
-            You burst onto the Bridge with the netron destruct bomb
-            under your arm and surprise 5 Gothons who are trying to
-            take control of the ship. Each of them has an even uglier
-            clown costume than the last. They haven't pulled their
-            weapons put yet, as they see the active bomb under your
-            arm and don't want to set it off.
+            你带着炸弹走到了舰桥上
+            这里有一个大惊喜在等着你
+            唔。或者说是五个大惊喜
+            好消息是这些大惊喜们忙着控制飞船，并没有在第一之间看到你
+            并且武器也仅仅只是挂在身上
+            不幸的是人生总有意外
+            五分之一的幸运看到了你
+            自然，也看到了你的大炸弹
+            你要怎么做？
         """))
 
         action = input("> ")
 
-        if action == "throw the bomb":
+        if action == "神圣手雷":
             print(dedent("""
-                In a panic you throw the bomb at the group of Gothons
-                and make a leap for the door. Right as you drop it a
-                Gothon shoots you right in the back killing you. As
-                you die you see another Gothon frantically try to
-                disarm the bomb. You die knowing they will probably
-                blow up when it goes off.
+                你将炸弹抛向怪物们的中间
+                他们吓坏了，但总有怪物能在危机时刻冷静下来
+                一枪秒了，还能说什么
+                你在死去看到的最后一幅画面
+                就是怪物们疯狂的试图停止炸弹的引爆
+                “没用的，中子爆炸反应不可逆”
+                你选择了和侵略者们同归于尽，
+                这就是你最后的荣誉
                 """))
             return 'death'
 
-        if action == "slowly place the bomb":
+        if action == "不怂":
             print(dedent("""
-                You point your blaster at the bomb under your arm and
-                the Gothons put their hands up and start to sweat.
-                You inch backward to the door, open it, and then
-                carefully place the bomb on the floor, pointing your
-                blaster at it. You then jump back through the door,
-                punch the close button and blast the lock so the
-                Gothons can't get out. Now that the bomb is placed
-                you run to the escape pod to get off this tin can.
+                你将炸弹拿在手上，缓缓向怪物们逼近
+                怪物们显然认出了你手上的危险物品是什么
+                它们举起双手，满头大汗，示意自己不会做出什么威胁到你的举动。
+                你慢慢的走向桥另一边的大门，怪物和你都十分紧张，
+                但好在你们双方都克制住了
+                你走到了大门前，将炸弹放下，穿过了大门
+                使用你的员工卡锁定了桥两边的大门，使门强制关闭。
+                在门关闭的瞬间，你看到了怪物们绝望的向你冲来
+                “这门质量不错”，你没想到在怪物的冲锋下这门居然一丝颤动都没有。
+                “还好当初升级飞船关键设施的公开投票上你并没有投反对票”
+                “该我自己逃跑了，逃生舱就在不远处”
                 """))
 
             return 'escape_pod'
