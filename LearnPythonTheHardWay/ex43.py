@@ -30,11 +30,11 @@ class Engine(object):
 class Death(Scene):
 
     quips = [
-        "You died. You kinda suck at this.",
-        "Your Mom would be proud...if she were smarter.",
-        "Such a luser.",
-        "I hava a small puppy that's better at this.",
-        "You're worse than your Dad's jokes."
+        "你死了，死于这种情况的你甘心吗",
+        "没有人会记得你...与你的战友",
+        "真实一场失败的人生",
+        "我想宇宙中的任意一个生物都能做的更好",
+        "再见了 朋友"
     ]
 
     def enter(self):
@@ -57,12 +57,16 @@ class CentralCorridor(Scene):
             一个红皮黑牙，身穿邪恶小丑服的肥胖怪物发现了你 。
             ----------- Warning ----------
             它堵在你前往武器工厂的必经之路上，并且已经掏出了武器。
-            你从未感觉死亡如此之近，你必须做些什么了
+            你从未感觉死亡如此之近，你必须做些什么了：
+
+            1. 开火！
+            2. 尝试躲避
+            3. 笑一笑
             """))
 
         action = input("> ")
 
-        if action == "射击":
+        if action == "1":
             print(dedent("""
                 你用你这一生最快的速度拔出了你的枪并向怪物开了火。
                 遗憾的是你未能击穿敌人的装甲。
@@ -71,7 +75,7 @@ class CentralCorridor(Scene):
                 这只是发生在宇宙中微不足道的一件小事罢了。
                 """))
             return 'death'
-        elif action == "躲避":
+        elif action == "2":
             print(dedent("""
                 “我可以的”，你对自己说道。
                 你从未感觉自己如此灵敏，就像李小龙附体，
@@ -83,7 +87,7 @@ class CentralCorridor(Scene):
                 你死的很有尊严。
                 """))
             return 'death'
-        elif action == "讲个笑话":
+        elif action == "3":
             print(dedent("""
                 在这千钧一发之际，你想起一句话
                 “爱笑的人运气都不会太差”
@@ -165,11 +169,14 @@ class TheBridge(Scene):
             五分之一的幸运看到了你
             自然，也看到了你的大炸弹
             你要怎么做？
+
+            1. 神圣手雷
+            2. 怂一点，问题不大
         """))
 
         action = input("> ")
 
-        if action == "神圣手雷":
+        if action == "1":
             print(dedent("""
                 你将炸弹抛向怪物们的中间
                 他们吓坏了，但总有怪物能在危机时刻冷静下来
@@ -182,7 +189,7 @@ class TheBridge(Scene):
                 """))
             return 'death'
 
-        if action == "不怂":
+        if action == "2":
             print(dedent("""
                 你将炸弹拿在手上，缓缓向怪物们逼近
                 怪物们显然认出了你手上的危险物品是什么
@@ -199,7 +206,7 @@ class TheBridge(Scene):
 
             return 'escape_pod'
         else:
-            print("DOES NOT COMPUTE!")
+            print("额，虽然我并不清楚你这是在做什么，但这显然没用。但幸好怪兽也没反应过来。")
             return "the_bridge"
 
 
@@ -207,34 +214,34 @@ class EscapePod(Scene):
 
     def enter(self):
         print(dedent("""
-            You rush through the ship desperately trying to make it to
-            the escape pod before the whole ship explodes. It seems
-            like hardly any Gothons are on the ship, so your run is
-            clear of interference. You get to the clamber with the
-            escape pods, and now need to pick one to take. Some of
-            them could be damaged but you don't have time to look.
-            There's 5 pods, which one do you take?
+            这次你的运气好极了，路上一个外星人都没有
+            你快速的跑到逃生设施中
+            看起来还有5个逃生舱能使用
+            但并不是所有的逃生舱都是安全的
+            来吧，命运的抉择
             """))
 
         good_pod = randint(1, 5)
+
+        # 官方外挂
+        print(good_pod)
+
         guess = input("[pod #]> ")
 
         if int(guess) != good_pod:
-            print(dedent("""
-                You jump into pod {guess} and hit the eject button.
-                The pod escapes out into the void of space, then
-                implodes as the hull ruptures, crushing your body into
-                jam jelly.
+            print(dedent(f"""
+                你选择了 {guess} 号船并猛击了发射键
+                飞船发射到了太空中
+                但很快，飞船就出现了裂缝
+                再见朋友，你即将成为宇宙中无尽漂浮的“垃圾”
                 """))
             return 'death'
         else:
-            print(dedent("""
-                You jump into pod {guess} and hit the eject button.
-                The pod easily slides out into space heading to the
-                planet below. As it flies to the planet, you look
-                back and see your ship implode then explode like a
-                bright start. taking out the Gothon ship at the same
-                time. You won!
+            print(dedent(f"""
+                你选择了 {guess} 号船并猛击了发射键
+                飞船发射到了太空中
+                你回头看，看到了飞船的大爆炸
+                你逃走了
                 """))
 
             return 'finished'
@@ -243,7 +250,7 @@ class EscapePod(Scene):
 class Finished(Scene):
 
     def enter(self):
-        print("You won! Good job.")
+        print("恭喜生还.")
         return 'finished'
 
 
