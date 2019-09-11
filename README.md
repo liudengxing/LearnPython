@@ -1,4 +1,4 @@
 # LearnPython
-My way to learn Python
+##### emmmmm ,该项目因不可抗力（指公司规划）停止维护
 
-emmmm , 该项目因不可抗力放弃维护
+My way to learn Python
